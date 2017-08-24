@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar组件</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./css/doc.css" media="all">
+</head>
+
+<body>
+    <div class="kit-doc">
+        <blockquote class="layui-elem-quote">Navbar组件是基于<a href="http://www.layui.com/doc/element/nav.html" target="_blank">layui导航菜单</a> 封装的组件，配合
+            <a href="tab.html">tab组件</a>能完成多开页面的操作</blockquote>
+        <div class="kit-doc-title">
+            <fieldset>
+                <legend><a name="blockquote">渲染方式</a></legend>
+            </fieldset>
+        </div>
+        <p> 该组件提供了三种渲染方式 </p>
+        <table class="layui-table">
+            <colgroup>
+                <col width="180">
+                <col width="230">
+                <col width="100">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>渲染方式</th>
+                    <th>方法</th>
+                    <th>备注</th>
+                    <th>详细说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>服务端渲染后绑定</td>
+                    <td>调用navbar.bind()方法</td>
+                    <td>已实现</td>
+                    <td>此方法需在dom元素渲染完成后执行
+                        <p>Example:</p>
+                        <pre class="layui-code">
+//注：需在容器内添加属性 kit-navbar或指定容器,example:navbar.set({elem:'#container'});
+navbar.bind(function(data) {
+    t.tabAdd(data);//这个方法为tab组件提供的方法
+});
+data的数据结构:
+data.icon;//图标，支持layui图标和fontawesome图标
+data.id;//id,唯一标识
+data.title;//标题
+data.url;//跳转地址</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>异步渲染方式(AJAX)</td>
+                    <td>通过设置url参数组件内部渲染</td>
+                    <td>未实现</td>
+                    <td>未实现就先不写用法啦..</td>
+                </tr>
+                <tr>
+                    <td>本地数据渲染方式</td>
+                    <td>通过设置data参数组件内部渲染</td>
+                    <td>未实现</td>
+                    <td>未实现就先不写用法啦…</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="kit-doc-title">
+            <fieldset>
+                <legend><a name="blockquote">可用的方法</a></legend>
+            </fieldset>
+        </div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>参数</th>
+                    <th>返回值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>set(options)</td>
+                    <td>options/object</td>
+                    <td>this/object</td>
+                    <td>配置一些全局参数,返回当前navbar对象，以便于链式调用
+                        <p>Example:</p>
+                        <pre class="layui-code">
+navbar.set({
+    elem:'#navbarContainer',
+    url:''
+});</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>bind(callback)</td>
+                    <td>callback/function(data)</td>
+                    <td>void</td>
+                    <td>绑定a标签的点击事件
+                        <p>Example:</p>
+                        <pre class="layui-code">
+navbar.bind(function(data) {
+    t.tabAdd(data);//这个方法为tab组件提供的方法
+});</pre></td>
+                </tr>
+            </tbody>
+        </table>
+        <blockquote class="layui-elem-quote">这个文档就先写到这里吧，后面新增了再补充啦。</blockquote>
+    </div>
+    <script src="./plugins/layui/layui.js"></script>
+</body>
+
+</html>

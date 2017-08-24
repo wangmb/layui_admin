@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar组件</title>
+    <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="./css/doc.css" media="all">
+</head>
+
+<body>
+    <div class="kit-doc">
+        <blockquote class="layui-elem-quote">Tab组件是基于<a href="http://www.layui.com/doc/element/tab.html" target="_blank">layui选项卡</a> 封装的组件，配合
+            <a href="navbar.html">Navbar组件</a>能完成多开页面的操作</blockquote>
+        <div class="kit-doc-title">
+            <fieldset>
+                <legend><a name="blockquote">可用的方法</a></legend>
+            </fieldset>
+        </div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="200">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>参数</th>
+                    <th>返回值</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>set(options)</td>
+                    <td>options/object</td>
+                    <td>this/object</td>
+                    <td>配置一些全局参数,返回当前tab对象，以便于链式调用
+                        <p>Example:</p>
+                        <pre class="layui-code">
+tab.set({
+    elem:'#container'
+});</pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>render()</td>
+                    <td>null</td>
+                    <td>void</td>
+                    <td>渲染tab选项卡到页面</td>
+                </tr>
+                <tr>
+                    <td>tabAdd(params)</td>
+                    <td>params/object</td>
+                    <td>void</td>
+                    <td>添加一个选项卡
+                        <p>Example:</p>
+                        <pre class="layui-code">
+tab.tabAdd({
+    icon:'fa-user',
+    id:'11',
+    title:'新选项卡',
+    url:'newtab.html'
+});</pre> 与navbar配合着用
+                        <p>Example:</p>
+                        <pre class="layui-code">
+navbar.bind(function(data) {//bind方法为navbar组件提供的方法
+    tab.tabAdd(data);
+});</pre>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <blockquote class="layui-elem-quote">这个文档就先写到这里吧，后面新增了再补充啦。</blockquote>
+    </div>
+    <script src="./plugins/layui/layui.js"></script>
+</body>
+
+</html>

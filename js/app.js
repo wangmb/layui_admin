@@ -1,4 +1,4 @@
-layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'iframe', 'navbar'], function(exports) {
+layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'], function(exports) {
     var $ = layui.jquery,
         element = layui.element,
         layer = layui.layer,
@@ -8,7 +8,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'iframe', 'navb
         form = layui.form,
         table = layui.table,
         loader = layui.loader,
-        iframe = layui.iframe,
+        tab = layui.tab,
         navbar = layui.navbar,
         _componentPath = 'components/';
     var app = {
@@ -62,10 +62,10 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'iframe', 'navb
                 });
             }
             if (_config.type === 'iframe') {
-                var ifr = new iframe().set({ elem: '#container' }).render();
+                tab.set({ elem: '#container' }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件
                 navbar.bind(function(data) {
-                    ifr.tabAdd(data);
+                    tab.tabAdd(data);
                 });
             }
 

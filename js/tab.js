@@ -1,16 +1,16 @@
 layui.define(['jquery', 'element'], function(exports) {
     var $ = layui.jquery,
-        _modName = 'iframe',
+        _modName = 'tab',
         element = layui.element,
         _doc = $(document),
         _win = $(window);
-    var Iframe = function() {
+    var Tab = function() {
         this.config = {
             elem: undefined
         };
     };
-    Iframe.fn = Iframe.prototype;
-    Iframe.fn.set = function(options) {
+    Tab.fn = Tab.prototype;
+    Tab.fn.set = function(options) {
         var that = this;
         $.extend(true, that.config, options);
         return that;
@@ -18,19 +18,20 @@ layui.define(['jquery', 'element'], function(exports) {
     /**
      * 渲染选项卡
      */
-    Iframe.fn.render = function() {
+    Tab.fn.render = function() {
         var that = this,
             _config = that.config;
         if (_config.elem === undefined) {
-            layui.hint().error('Iframe error:请配置选择卡容器.')
+            layui.hint().error('Tab error:请配置选择卡容器.')
             return that;
         }
         _tab.createTabDom(_config.elem);
         return that;
     };
-    Iframe.fn.tabAdd = function(params) {
+    Tab.fn.tabAdd = function(params) {
         _tab.tabAdd(params);
     };
+
     var _tab = {
         _filter: 'kitTab', //过滤器名
         _title: undefined,
@@ -194,5 +195,7 @@ layui.define(['jquery', 'element'], function(exports) {
         }
     };
 
-    exports('iframe', Iframe);
+    var t = new Tab();
+
+    exports('tab', t);
 });

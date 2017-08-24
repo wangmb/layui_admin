@@ -106,18 +106,35 @@
                     <li class="layui-timeline-item">
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
+                            <h3 class="layui-timeline-title">置顶的说明文档</h3>
+                            <ul>
+                                <li>交流群:
+                                    <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=7d46b4a74805131378febabe99963fdd3e767544a34f9b92a9db0737ebf130a1"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="BeginnerAdmin" title="BeginnerAdmin"></a>
+                                </li>
+                                <li>点击进入群哦，如果实在加不了还有群号啊[248049395]
+                                </li>
+                                <li>下载地址：
+                                    <a href="http://git.oschina.net/besteasyteam/kit_admin" target="_blank">http://git.oschina.net/besteasyteam/kit_admin</a>(大家先在这里下载吧.)
+                                </li>
+                                <li>大家在用的过程中有什么问题的话可以在群里问啊，别的先不写了...</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="layui-timeline-item">
+                        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                        <div class="layui-timeline-content layui-text">
                             <h3 class="layui-timeline-title">8月24日</h3>
                             <p>
                                 <h3>BeginnerAdmin 改名为kit_admin</h1>
                                     <ul>
                                         <li>项目重构，基于layui2.0</li>
                                         <li>添加navbar模块
-                                            <a href="#">navbar文档</a>
+                                            <a href="navbar.html">navbar文档</a>
                                         </li>
                                         <li>添加tab模块
-                                            <a href="#">tab文档</a>
+                                            <a href="tab.html">tab文档</a>
                                         </li>
-                                        <li>更新日志先不写了...</li>
+                                        <li>还有不想写了....</li>
                                     </ul>
                             </p>
                         </div>
@@ -139,6 +156,15 @@
         </div>
     </div>
     <script src="./plugins/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: 'js/'
+        }).use('tab', function() {
+            // var tab = layui.tab;
+
+            // tab.tabAdd();
+        });
+    </script>
 </body>
 
 </html>
