@@ -1,3 +1,10 @@
+/**
+ * Name:tab.js
+ * Author:Van
+ * E-mail:zheng_jinfan@126.com
+ * Website:http://kit.zhengjinfan.cn/
+ * LICENSE:MIT
+ */
 layui.define(['jquery', 'element'], function(exports) {
     var $ = layui.jquery,
         _modName = 'tab',
@@ -25,28 +32,40 @@ layui.define(['jquery', 'element'], function(exports) {
             layui.hint().error('Tab error:请配置选择卡容器.')
             return that;
         }
-        _tab.createTabDom(_config.elem);
+        _tab._config = _config;
+        _tab.createTabDom();
         return that;
     };
+    /**
+     * 添加一个选项卡
+     */
     Tab.fn.tabAdd = function(params) {
         _tab.tabAdd(params);
     };
-
+    //私用对象
     var _tab = {
+        _config: {},
         _filter: 'kitTab', //过滤器名
         _title: undefined,
         _content: undefined,
         _parentElem: undefined, //要存放的容器
         //检查选项卡DOM是否存在
         tabDomExists: function() {
-            return _doc.find('div.kit-tab').length > 0;
+            var that = this;
+            if (_doc.find('div.kit-tab').length > 0) {
+                that._title = $('.kit-tab ul.layui-tab-title');
+                that._content = $('.kit-tab div.layui-tab-content');
+                return true;
+            }
+            return false;
         },
         /**
          * 创建选项卡DOM
          */
-        createTabDom: function(elem) {
-            var that = this;
-            that._parentElem = elem;
+        createTabDom: function() {
+            var that = this,
+                _config = that._config;
+            that._parentElem = _config.elem;
             if (that.tabDomExists())
                 return;
             //模板
@@ -72,7 +91,7 @@ layui.define(['jquery', 'element'], function(exports) {
                 '</div>'
             ];
             //渲染
-            $(elem).html(tpl.join(''));
+            $(_config.elem).html(tpl.join(''));
             that._title = $('.kit-tab ul.layui-tab-title');
             that._content = $('.kit-tab div.layui-tab-content');
             var _tool = $('.kit-tab-tool'),
@@ -125,7 +144,7 @@ layui.define(['jquery', 'element'], function(exports) {
         winResize: function() {
             var that = this;
             _win.on('resize', function() {
-                var currBoxHeight = $(that._parentElem).height();
+                var currBoxHeight = $(that._parentElem).height(); //获取当前容器的调试
                 $('.kit-tab .layui-tab-content iframe').height(currBoxHeight - 45);
             }).resize();
         },
@@ -158,7 +177,8 @@ layui.define(['jquery', 'element'], function(exports) {
          * 添加一个选项卡，已存在则获取焦点
          */
         tabAdd: function(options) {
-            var that = this;
+            var that = this,
+                _config = that._config;
             options = options || {
                 id: new Date().getTime(),
                 title: '新标签页',
@@ -188,10 +208,26 @@ layui.define(['jquery', 'element'], function(exports) {
             that._content.append(contentHtm);
             //监听选项卡关闭事件
             that.getTab(id).find('i.layui-tab-close').off('click').on('click', function() {
-                that.tabDelete(id);
+                //关闭之前
+                if (_config.closeBefore) {
+                    if (_config.closeBefore(options)) {
+                        that.tabDelete(id);
+                    }
+                } else {
+                    that.tabDelete(id);
+                }
             });
             that.tabChange(id);
             that.winResize();
+            if (_config.onSwitch) {
+                element.on('tab(' + that._filter + ')', function(data) {
+                    _config.onSwitch({
+                        index: data.index,
+                        elem: data.elem,
+                        layId: that._title.children('li').eq(data.index).attr('lay-id')
+                    });
+                });
+            }
         }
     };
 

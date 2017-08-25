@@ -1,5 +1,3 @@
-//依赖layui.js
-
 layui.define(['jquery'], function(exports) {
     var jQuery = layui.jquery;
 

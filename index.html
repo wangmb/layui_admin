@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 后台大布局 - Layui</title>
+    <title>KIT ADMIN</title>
     <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css" media="all">
     <link rel="stylesheet" href="./css/app.css" media="all">
@@ -14,7 +14,6 @@
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
             <div class="layui-logo">KIT ADMIN</div>
-            <!-- 头部区域（可配合layui已有的水平导航） -->
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item"><a href="">控制台</a></li>
                 <li class="layui-nav-item"><a href="">商品管理</a></li>
@@ -56,7 +55,7 @@
                                 <a href="javascript:;" data-url="form.html" data-icon="fa-user" data-title="表单" kit-target data-id='2'><i class="fa fa-user" aria-hidden="true"></i>&nbsp;表单</a>
                             </dd>
                             <dd>
-                                <a href="javascript:;" data-url="list3.html" data-icon="&#xe628;" data-title="列表三" kit-target data-id='3'><i class="layui-icon">&#xe628;</i>&nbsp;列表三</a>
+                                <a href="javascript:;" data-url="nav.html" data-icon="&#xe628;" data-title="导航栏" kit-target data-id='3'><i class="layui-icon">&#xe628;</i>&nbsp;导航栏</a>
                             </dd>
                             <dd>
                                 <a href="javascript:;" data-url="list4.html" data-icon="&#xe614;" data-title="列表四" kit-target data-id='4'><i class="layui-icon">&#xe614;</i>&nbsp;列表四</a>
@@ -75,10 +74,10 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-target>表格(page)</a>
+                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader>表格(page)</a>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-target>表单(page)</a>
+                        <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader>表单(page)</a>
                     </li>
                 </ul>
             </div>
@@ -96,11 +95,14 @@
     </div>
     <script src="./plugins/layui/layui.js"></script>
     <script>
+        var message;
         layui.config({
             base: 'js/'
-        }).use('app', function() {
+        }).use(['app', 'message'], function() {
             var app = layui.app;
-
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
             app.set({
                 type: 'iframe'
             }).init();

@@ -1,3 +1,10 @@
+/**
+ * Name:app.js
+ * Author:Van
+ * E-mail:zheng_jinfan@126.com
+ * Website:http://kit.zhengjinfan.cn/
+ * LICENSE:MIT
+ */
 layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'], function(exports) {
     var $ = layui.jquery,
         element = layui.element,
@@ -27,7 +34,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
             var that = this,
                 _config = that.config;
             if (_config.type === 'page') {
-                $('a[kit-target]').on('click', function() {
+                $('a[kit-loader]').on('click', function() {
                     var url = $(this).data('url'),
                         name = $(this).data('name'),
                         id = $(this).data('id');
@@ -62,7 +69,22 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 });
             }
             if (_config.type === 'iframe') {
-                tab.set({ elem: '#container' }).render();
+                tab.set({
+                    elem: '#container',
+                    onSwitch: function(data) { //选项卡切换时触发
+                        //console.log(data.layId); //lay-id值
+                        //console.log(data.index); //得到当前Tab的所在下标
+                        //console.log(data.elem); //得到当前的Tab大容器
+                    },
+                    closeBefore: function(data) { //关闭选项卡之前触发
+                        // console.log(data);
+                        // console.log(data.icon); //显示的图标
+                        // console.log(data.id); //lay-id
+                        // console.log(data.title); //显示的标题
+                        // console.log(data.url); //跳转的地址
+                        return true; //返回true则关闭
+                    }
+                }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件
                 navbar.bind(function(data) {
                     tab.tabAdd(data);
