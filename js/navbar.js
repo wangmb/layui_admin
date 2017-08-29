@@ -12,6 +12,7 @@ layui.define(['jquery'], function(exports) {
         _doc = $(document);
 
     var navbar = {
+        v: '1.0.0',
         config: {
             elem: undefined,
             filter: 'kitNavbar' //过滤器名称
@@ -58,6 +59,22 @@ layui.define(['jquery'], function(exports) {
                     }
                     typeof callback === 'function' && callback(data);
                 });
+            });
+            $('.kit-side-fold').off('click').on('click', function() {
+                var _side = _doc.find('div.kit-side');
+                if (_side.hasClass('kit-sided')) {
+                    _side.removeClass('kit-sided');
+                    _side.find('li.layui-nav-item').removeClass('kit-side-folded');
+                    _side.find('dd').removeClass('kit-side-folded');
+                    _doc.find('div.layui-body').removeClass('kit-body-folded');
+                    _doc.find('div.layui-footer').removeClass('kit-footer-folded');
+                } else {
+                    _side.addClass('kit-sided');
+                    _side.find('li.layui-nav-item').addClass('kit-side-folded');
+                    _side.find('dd').addClass('kit-side-folded');
+                    _doc.find('div.layui-body').addClass('kit-body-folded');
+                    _doc.find('div.layui-footer').addClass('kit-footer-folded');
+                }
             });
             return that;
         }

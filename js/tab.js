@@ -15,6 +15,7 @@ layui.define(['jquery', 'element'], function(exports) {
         this.config = {
             elem: undefined
         };
+        this.v = '1.0.0';
     };
     Tab.fn = Tab.prototype;
     Tab.fn.set = function(options) {

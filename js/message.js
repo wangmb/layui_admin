@@ -12,6 +12,7 @@ layui.define(['jquery'], function(exports) {
         _body = $('body'),
         _MESSAGE = '.kit-message';
     var message = {
+        v: '1.0.0',
         times: 1,
         _message: function() {
             var _msg = $(_MESSAGE);

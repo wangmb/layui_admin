@@ -37,7 +37,7 @@
             <tbody>
                 <tr>
                     <td>set(options)</td>
-                    <td>options/object</td>
+                    <td><a href="#options">options</a>/object</td>
                     <td>this/object</td>
                     <td>配置一些全局参数,返回当前tab对象，以便于链式调用
                         <p>Example:</p>
@@ -73,8 +73,66 @@ navbar.bind(function(data) {//bind方法为navbar组件提供的方法
 });</pre>
                     </td>
                 </tr>
-
-
+            </tbody>
+        </table>
+        <div class="kit-doc-title">
+            <fieldset>
+                <legend><a name="blockquote" id="options">options参数说明</a></legend>
+            </fieldset>
+        </div>
+        <table class="layui-table">
+            <colgroup>
+                <col width="150">
+                <col width="150">
+                <col width="150">
+                <col>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <td>默认值</td>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>elem</td>
+                    <td>string</td>
+                    <td>#container</td>
+                    <td>容器DOM，支持id选择器和类选择器</td>
+                </tr>
+                <tr>
+                    <td>onSwitch</td>
+                    <td>function</td>
+                    <td>undefined</td>
+                    <td>选择卡切换时将触发该事件<br/> 示例:
+                        <pre class="layui-code">
+tab.set({
+    onSwitch: function(data) { //选项卡切换时触发
+        //console.log(data.layId); //lay-id值
+        //console.log(data.index); //得到当前Tab的所在下标
+        //console.log(data.elem); //得到当前的Tab大容器
+}});                        </pre>
+                    </td>
+                </tr>
+                <tr>
+                    <td>closeBefore</td>
+                    <td>function</td>
+                    <td>undefined</td>
+                    <td>关闭选项卡之前触发该事件<br/> 示例:
+                        <pre class="layui-code">
+tab.set({
+    closeBefore: function(data) { //关闭选项卡之前触发
+        // console.log(data);
+        // console.log(data.icon); //显示的图标
+        // console.log(data.id); //lay-id
+        // console.log(data.title); //显示的标题
+        // console.log(data.url); //跳转的地址
+        return true; //返回true则关闭
+}});                        </pre>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <blockquote class="layui-elem-quote">这个文档就先写到这里吧，后面新增了再补充啦。</blockquote>

@@ -33,8 +33,84 @@
     background-color: rgba(0, 0, 0, .38);
 }
 
-.layui-layout-admin .layui-header {
-    overflow: hidden;
+.layui-layout-admin .layui-header .layui-layout-right {
+    right: 5px;
+}
+
+.kit-nav .layui-nav-item {
+    line-height: 50px;
+}
+
+.kit-nav .layui-nav-item .layui-nav-more {
+    top: 23px;
+}
+
+.kit-nav .layui-nav-item .layui-nav-mored {
+    top: 18px;
+}
+
+.kit-nav .layui-nav-item .layui-nav-child {
+    top: 55px;
+}
+
+.kit-layout-admin .layui-footer {
+    height: 35px;
+    line-height: 35px;
+}
+
+.kit-layout-admin .layui-body {
+    bottom: 35px;
+    top: 50px;
+}
+
+.kit-layout-admin .layui-header {
+    height: 50px;
+}
+
+.kit-layout-admin .layui-logo {
+    line-height: 50px;
+}
+
+.kit-layout-admin .kit-side {
+    top: 50px;
+}
+
+.kit-layout-admin .kit-sided {
+    width: 50px;
+}
+
+.kit-side .layui-side-scroll {
+    width: auto;
+}
+
+.kit-side .layui-side-scroll .kit-side-fold {
+    height: 35px;
+    background-color: #4A5064;
+    color: #aeb9c2;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.kit-side .layui-side-scroll .kit-side-folded {
+    text-align: center;
+}
+
+.kit-side .layui-side-scroll .kit-side-folded a {
+    padding: 0;
+}
+
+.kit-side .layui-side-scroll .kit-side-folded a span {
+    display: none;
+}
+
+.kit-side .layui-side-scroll .layui-nav-tree {
+    width: auto;
+}
+
+.kit-layout-admin .kit-body-folded,
+.kit-layout-admin .kit-footer-folded {
+    left: 50px;
 }
 
 
@@ -161,12 +237,13 @@
     width: 60px;
     height: 40px;
     top: 0;
-    right: 0;
+    right: 10px;
     border-bottom: 1px solid #e2e2e2;
     border-left: 1px solid #e2e2e2;
     line-height: 40px;
     text-align: center;
     cursor: pointer;
+    border-right: 1px solid #e2e2e2;
 }
 
 .kit-tab .kit-tab-tool:hover {
@@ -176,7 +253,7 @@
 .kit-tab .kit-tab-tool-body {
     position: absolute;
     top: 40px;
-    right: 0;
+    right: 10px;
     width: 150px;
     border: 1px solid #e2e2e2;
     display: none;
@@ -199,12 +276,11 @@
 }
 
 .kit-tab .kit-tab-tool-body .kit-line {
-    /* height: 1px; */
     border-bottom: 1px solid #e2e2e2;
 }
 
 .kit-tab .layui-tab-title {
-    width: calc(100% - 61px);
+    width: calc(100% - 71px);
     padding-right: 0;
     position: absolute;
 }
@@ -221,3 +297,25 @@
 
 
 /*选项卡相关 end*/
+
+@media screen and (max-width: 950px) {
+    .kit-layout-admin .layui-body,
+    .kit-layout-admin .layui-footer {
+        left: 50px;
+    }
+    .kit-layout-admin .kit-side {
+        width: 50px;
+    }
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item,
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item dl dd {
+        text-align: center;
+    }
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item a,
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item dl dd a {
+        padding: 0;
+    }
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item a span,
+    .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item dl dd a span {
+        display: none;
+    }
+}
