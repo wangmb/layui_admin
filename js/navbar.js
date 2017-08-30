@@ -5,16 +5,26 @@
  * Website:http://kit.zhengjinfan.cn/
  * LICENSE:MIT
  */
-layui.define(['jquery'], function(exports) {
+layui.define(['layer', 'laytpl', 'element'], function(exports) {
     var $ = layui.jquery,
+        layer = layui.layer,
         _modName = 'navbar',
         _win = $(window),
-        _doc = $(document);
+        _doc = $(document),
+        laytpl = layui.laytpl,
+        element = layui.element;
 
     var navbar = {
-        v: '1.0.0',
+        v: '1.0.1',
         config: {
-            elem: undefined,
+            data: undefined, //静态数据
+            remote: {
+                url: undefined, //接口地址
+                type: 'GET', //请求方式
+                jsonp: false //跨域
+            },
+            cached: false, //是否缓存
+            elem: undefined, //容器
             filter: 'kitNavbar' //过滤器名称
         },
         set: function(options) {
@@ -23,23 +33,42 @@ layui.define(['jquery'], function(exports) {
             return that;
         },
         /**
+         * 是否已设置了elem
+         */
+        hasElem: function() {
+            var that = this,
+                _config = that.config;
+            if (_config.elem === undefined && _doc.find('ul[kit-navbar]').length === 0 && $(_config.elem)) {
+                layui.hint().error('Navbar error:请配置Navbar容器.');
+                return false;
+            }
+            return true;
+        },
+        /**
+         * 获取容器的jq对象
+         */
+        getElem: function() {
+            var _config = this.config;
+            return (_config.elem !== undefined && $(_config.elem).length > 0) ? $(_config.elem) : _doc.find('ul[kit-navbar]');
+        },
+        /**
          * 绑定特定a标签的点击事件
          */
         bind: function(callback) {
             var that = this,
                 _config = that.config;
-            if (_config.elem === undefined && _doc.find('ul[kit-navbar]').length === 0) {
-                layui.hint().error('Navbar error:请配置Navbar容器.');
+            if (!that.hasElem())
                 return that;
-            }
-            var _elem;
-            if (_config.elem !== undefined && $(_config.elem).length > 0) {
-                _elem = $(_config.elem);
-            } else {
-                _elem = _doc.find('ul[kit-navbar]');
-            }
+            var _elem = that.getElem();
             _elem.find('a[kit-target]').each(function() {
-                var _that = $(this);
+                var _that = $(this),
+                    tipsId = undefined;
+                _that.hover(function() {
+                    tipsId = layer.tips($(this).children('span').text(), this);
+                }, function() {
+                    if (tipsId)
+                        layer.close(tipsId);
+                });
                 _that.off('click').on('click', function() {
                     var options = _that.data('options');
                     var data;
@@ -76,6 +105,101 @@ layui.define(['jquery'], function(exports) {
                     _doc.find('div.layui-footer').addClass('kit-footer-folded');
                 }
             });
+            return that;
+        },
+        /**
+         * 渲染navbar
+         */
+        render: function(callback) {
+            var that = this,
+                _config = that.config, //配置
+                _remote = _config.remote, //远程参数配置
+                _tpl = [
+                    '{{# layui.each(d,function(index, item){ }}',
+                    '<li class="layui-nav-item">',
+                    '{{# var hasChildren = item.children!==undefined && item.children.length>0; }}',
+                    '{{# if(hasChildren){ }}',
+                    '<a href="javascript:;">',
+                    '{{# if (item.icon.indexOf("fa-") !== -1) { }}',
+                    '<i class="fa {{item.icon}}" aria-hidden="true"></i>',
+                    '{{# } else { }}',
+                    '<i class="layui-icon">{{item.icon}}</i>',
+                    '{{# } }}',
+                    '<span> {{item.title}}</span>',
+                    '</a>',
+                    '{{# var children = item.children; }}',
+                    '<dl class="layui-nav-child">',
+                    '{{# layui.each(children,function(childIndex, child){ }}',
+                    '<dd>',
+                    '<a href="javascript:;" kit-target data-options="{url:\'{{child.url}}\',icon:\'{{child.icon}}\',title:\'{{child.title}}\',id:\'{{child.id}}\'}">',
+                    '{{# if (child.icon.indexOf("fa-") !== -1) { }}',
+                    '<i class="fa {{child.icon}}" aria-hidden="true"></i>',
+                    '{{# } else { }}',
+                    '<i class="layui-icon">{{child.icon}}</i>',
+                    '{{# } }}',
+                    '<span> {{child.title}}</span>',
+                    '</a>',
+                    '</dd>',
+                    '{{# }); }}',
+                    '</dl>',
+                    '{{# }else{ }}',
+                    '<a href="javascript:;" kit-target data-options="{url:\'{{item.url}}\',icon:\'{{item.icon}}\',title:\'{{item.title}}\',id:\'{{item.id}}\'}">',
+                    '{{# if (item.icon.indexOf("fa-") !== -1) { }}',
+                    '<i class="fa {{item.icon}}" aria-hidden="true"></i>',
+                    '{{# } else { }}',
+                    '<i class="layui-icon">{{item.icon}}</i>',
+                    '{{# } }}',
+                    '<span> {{item.title}}</span>',
+                    '</a>',
+                    '{{# } }}',
+                    '</li>',
+                    '{{# }); }}',
+                ], //模板
+                _data = [];
+            var navbarLoadIndex = layer.load(2);
+            if (!that.hasElem())
+                return that;
+            var _elem = that.getElem();
+            //本地数据优先
+            if (_config.data !== undefined && _config.data.length > 0) {
+                _data = _config.data;
+            } else {
+                var dataType = _remote.jsonp ? 'jsonp' : 'json';
+                var options = {
+                    url: _remote.url,
+                    type: _remote.type,
+                    error: function(xhr, status, thrown) {
+                        layui.hint().error('Navbar error:AJAX请求出错.' + thrown);
+                    },
+                    success: function(res) {
+                        _data = res;
+                    }
+                };
+                $.extend(true, options, _remote.jsonp ? {
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    jsonpCallback: 'jsonpCallback'
+                } : {
+                    dataType: 'json'
+                });
+                $.support.cors = true;
+                $.ajax(options);
+            }
+            var tIndex = setInterval(function() {
+                if (_data.length > 0)
+                    clearInterval(tIndex);
+                //渲染模板
+                laytpl(_tpl.join('')).render(_data, function(html) {
+                    _elem.html(html);
+                    element.init();
+                    //绑定a标签的点击事件
+                    that.bind(function(data) {
+                        typeof callback === 'function' && callback(data);
+                    });
+                    //关闭等待层
+                    navbarLoadIndex && layer.close(navbarLoadIndex);
+                });
+            }, 50);
             return that;
         }
     };

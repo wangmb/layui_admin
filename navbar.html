@@ -91,14 +91,14 @@ data.url;//跳转地址</pre>
                 <tr>
                     <td>异步渲染方式(AJAX)</td>
                     <td>通过设置url参数组件内部渲染</td>
-                    <td>未实现</td>
-                    <td>未实现就先不写用法啦..</td>
+                    <td>已实现</td>
+                    <td>设置remote参数，调用render方法</td>
                 </tr>
                 <tr>
                     <td>本地数据渲染方式</td>
                     <td>通过设置data参数组件内部渲染</td>
-                    <td>未实现</td>
-                    <td>未实现就先不写用法啦…</td>
+                    <td>已实现</td>
+                    <td>设置data参数，调用render方法</td>
                 </tr>
             </tbody>
         </table>
@@ -147,6 +147,17 @@ navbar.bind(function(data) {
     t.tabAdd(data);//这个方法为tab组件提供的方法
 });</pre></td>
                 </tr>
+                <tr>
+                    <td>render(callback)</td>
+                    <td>callback/function(data)</td>
+                    <td>void</td>
+                    <td>渲染navbar
+                        <p>Example:</p>
+                        <pre class="layui-code">
+    navbar.render(function(data) {
+        t.tabAdd(data);//这个方法为tab组件提供的方法
+    });</pre></td>
+                </tr>
             </tbody>
         </table>
         <div class="kit-doc-title">
@@ -182,8 +193,61 @@ navbar.bind(function(data) {
                     <td>kitNavbar</td>
                     <td>过滤器名称</td>
                 </tr>
+                <tr>
+                    <td>data</td>
+                    <td>object</td>
+                    <td>undefined</td>
+                    <td>本地数据源，有特定的数据结构，<a href="#data">点击我查看</a></td>
+                </tr>
+                <tr>
+                    <td>remote</td>
+                    <td>object</td>
+                    <td> 详细看描述 url:undefined,type:'GET',jsonp:false</td>
+                    <td>
+                        <pre class="layui-code">
+navbar.set{
+    remote:{
+        url: 'xx/api', //接口地址
+        type: 'POSST', //请求方式
+        jsonp: false //跨域
+    }
+}</pre>
+                    </td>
+                </tr>
             </tbody>
         </table>
+        <div class="kit-doc-title">
+            <fieldset>
+                <legend><a name="blockquote" id="data">Data数据结构(注：当前只支持两级菜单)</a></legend>
+            </fieldset>
+        </div>
+        <blockquote class="layui-elem-quote">
+            <pre class="layui-code">
+//图标支持<a href="http://www.layui.com/doc/element/icon.html" target="_blank">layui图标</a>和<a href="http://www.fontawesome.com.cn/faicons/" target="_blank">fontawesome字体图标</a>
+[{
+    "id": "1",
+    "title": "基本元素",
+    "icon": "fa-cubes",
+    "spread": true,
+    "children": [{
+        "id": "7",
+        "title": "表格",
+        "icon": "&#xe6c6;",
+        "url": "test.html"
+    }, {
+        "id": "8",
+        "title": "表单",
+        "icon": "&#xe63c;",
+        "url": "form.html"
+    }]
+}, {
+    "id": "5",
+    "title": "这是一级导航",
+    "icon": "fa-stop-circle",
+    "url": "https://www.baidu.com",
+    "spread": false
+}]</pre>
+        </blockquote>
         <blockquote class="layui-elem-quote">这个文档就先写到这里吧，后面新增了再补充啦。</blockquote>
     </div>
     <script src="./plugins/layui/layui.js"></script>

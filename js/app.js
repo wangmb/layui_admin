@@ -85,17 +85,51 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                         return true; //返回true则关闭
                     }
                 }).render();
-                //navbar加载方式一，直接绑定已有的dom元素事件
+                //navbar加载方式一，直接绑定已有的dom元素事件                
                 navbar.bind(function(data) {
                     tab.tabAdd(data);
                 });
+                //navbar加载方式二，设置远程地址加载
+                // navbar.set({
+                //     remote: {
+                //         url: '/datas/test.json'
+                //     }
+                // }).render(function(data) {
+                //     tab.tabAdd(data);
+                // });
+                //navbar加载方式三，设置data本地数据
+                // navbar.set({
+                //     data: [{
+                //         id: "1",
+                //         title: "基本元素",
+                //         icon: "fa-cubes",
+                //         spread: true,
+                //         children: [{
+                //             id: "7",
+                //             title: "表格",
+                //             icon: "&#xe6c6;",
+                //             url: "test.html"
+                //         }, {
+                //             id: "8",
+                //             title: "表单",
+                //             icon: "&#xe63c;",
+                //             url: "form.html"
+                //         }]
+                //     }, {
+                //         id: "5",
+                //         title: "这是一级导航",
+                //         icon: "fa-stop-circle",
+                //         url: "https://www.baidu.com",
+                //         spread: false
+                //     }]
+                // }).render(function(data) {
+                //     tab.tabAdd(data);
+                // });
             }
 
             return that;
         }
     };
-    // app.hello();
-    //app.init();
 
     //输出test接口
     exports('app', app);

@@ -17,7 +17,7 @@
             <ul class="layui-nav layui-layout-left kit-nav">
                 <li class="layui-nav-item"><a href="javascript:;">控制台</a></li>
                 <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
-                <li class="layui-nav-item"><a href="javascript:;">用户</a></li>
+                <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">其它系统</a>
                     <dl class="layui-nav-child">
@@ -84,7 +84,6 @@
                 </ul>
             </div>
         </div>
-
         <div class="layui-body" id="container">
             <!-- 内容主体区域 -->
             <div style="padding: 15px;">主体内容加载中,请稍等...</div>
@@ -103,13 +102,24 @@
         layui.config({
             base: 'js/'
         }).use(['app', 'message'], function() {
-            var app = layui.app;
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
             //将message设置为全局以便子页面调用
             message = layui.message;
             //主入口
             app.set({
                 type: 'iframe'
             }).init();
+            $('#pay').on('click', function() {
+                layer.open({
+                    title: false,
+                    type: 1,
+                    content: '<img src="images/pay.png" />',
+                    area: ['500px', '250px'],
+                    shadeClose: true
+                });
+            });
         });
     </script>
 </body>

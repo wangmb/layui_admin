@@ -13,9 +13,10 @@ layui.define(['jquery', 'element'], function(exports) {
         _win = $(window);
     var Tab = function() {
         this.config = {
-            elem: undefined
+            elem: undefined,
+            mainUrl: 'main.html'
         };
-        this.v = '1.0.0';
+        this.v = '1.0.1';
     };
     Tab.fn = Tab.prototype;
     Tab.fn.set = function(options) {
@@ -87,7 +88,7 @@ layui.define(['jquery', 'element'], function(exports) {
                 '</ul>',
                 '</div>',
                 '<div class="layui-tab-content">',
-                '<div class="layui-tab-item layui-show" lay-item-id="-1"><iframe src="main.html"></iframe></div>',
+                '<div class="layui-tab-item layui-show" lay-item-id="-1"><iframe src="' + _config.mainUrl + '"></iframe></div>',
                 '</div>',
                 '</div>'
             ];
