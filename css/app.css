@@ -53,6 +53,26 @@
     top: 55px;
 }
 
+.kit-nav .layui-this {
+    background-color: #393D49!important;
+}
+
+.kit-nav * {
+    font-size: 13px;
+}
+
+.layui-layout-left .layui-nav-item:hover {
+    background-color: #393D49!important;
+}
+
+.kit-nav .layui-nav-bar {
+    height: 0;
+}
+
+.kit-nav .layui-this:after {
+    content: none;
+}
+
 .kit-layout-admin .layui-footer {
     height: 35px;
     line-height: 35px;

@@ -5,7 +5,7 @@
  * Website:http://kit.zhengjinfan.cn/
  * LICENSE:MIT
  */
-layui.define(['jquery', 'element'], function(exports) {
+layui.define(['jquery', 'element', 'nprogress'], function(exports) {
     var $ = layui.jquery,
         _modName = 'tab',
         element = layui.element,
@@ -16,7 +16,7 @@ layui.define(['jquery', 'element'], function(exports) {
             elem: undefined,
             mainUrl: 'main.html'
         };
-        this.v = '1.0.1';
+        this.v = '1.0.2';
     };
     Tab.fn = Tab.prototype;
     Tab.fn.set = function(options) {
@@ -195,6 +195,7 @@ layui.define(['jquery', 'element'], function(exports) {
                 that.tabChange(id);
                 return;
             }
+            NProgress.start();
             var titleHtm = ['<li class="layui-this" lay-id="' + id + '" >'];
             if (icon.indexOf('fa-') !== -1) {
                 titleHtm.push('<i class="fa ' + icon + '" aria-hidden="true"></i>');
@@ -221,6 +222,9 @@ layui.define(['jquery', 'element'], function(exports) {
             });
             that.tabChange(id);
             that.winResize();
+            that._content.find('div[lay-item-id=' + id + ']').find('iframe').on('load', function() {
+                NProgress.done();
+            });
             if (_config.onSwitch) {
                 element.on('tab(' + that._filter + ')', function(data) {
                     _config.onSwitch({
@@ -230,6 +234,7 @@ layui.define(['jquery', 'element'], function(exports) {
                     });
                 });
             }
+            //NProgress.done();
         }
     };
 

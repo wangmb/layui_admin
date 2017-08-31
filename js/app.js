@@ -5,7 +5,8 @@
  * Website:http://kit.zhengjinfan.cn/
  * LICENSE:MIT
  */
-layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'], function(exports) {
+var tab;
+layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel'], function(exports) {
     var $ = layui.jquery,
         element = layui.element,
         layer = layui.layer,
@@ -15,9 +16,9 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
         form = layui.form,
         table = layui.table,
         loader = layui.loader,
-        tab = layui.tab,
         navbar = layui.navbar,
         _componentPath = 'components/';
+    tab = layui.tab
     var app = {
         hello: function(str) {
             layer.alert('Hello ' + (str || 'test'));
@@ -92,7 +93,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 //navbar加载方式二，设置远程地址加载
                 // navbar.set({
                 //     remote: {
-                //         url: '/datas/test.json'
+                //         url: '/datas/navbar1.json'
                 //     }
                 // }).render(function(data) {
                 //     tab.tabAdd(data);
@@ -125,8 +126,68 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 // }).render(function(data) {
                 //     tab.tabAdd(data);
                 // });
-            }
 
+                //处理顶部一级菜单
+                var onelevel = layui.onelevel;
+                if (onelevel.hasElem()) {
+                    onelevel.set({
+                        remote: {
+                            url: '/datas/onelevel1.json' //远程地址
+                        },
+                        onClicked: function(id) {
+                            switch (id) {
+                                case 1:
+                                    navbar.set({
+                                        remote: {
+                                            url: '/datas/navbar1.json'
+                                        }
+                                    }).render(function(data) {
+                                        tab.tabAdd(data);
+                                    });
+                                    break;
+                                case 2:
+                                    navbar.set({
+                                        remote: {
+                                            url: '/datas/navbar2.json'
+                                        }
+                                    }).render(function(data) {
+                                        tab.tabAdd(data);
+                                    });
+                                    break;
+                                default:
+                                    navbar.set({
+                                        data: [{
+                                            id: "1",
+                                            title: "基本元素",
+                                            icon: "fa-cubes",
+                                            spread: true,
+                                            children: [{
+                                                id: "7",
+                                                title: "表格",
+                                                icon: "&#xe6c6;",
+                                                url: "test.html"
+                                            }, {
+                                                id: "8",
+                                                title: "表单",
+                                                icon: "&#xe63c;",
+                                                url: "form.html"
+                                            }]
+                                        }, {
+                                            id: "5",
+                                            title: "这是一级导航",
+                                            icon: "fa-stop-circle",
+                                            url: "https://www.baidu.com",
+                                            spread: false
+                                        }]
+                                    }).render(function(data) {
+                                        tab.tabAdd(data);
+                                    });
+                                    break;
+                            }
+                        }
+                    }).render();
+                }
+            }
             return that;
         }
     };

@@ -29,6 +29,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
         },
         set: function(options) {
             var that = this;
+            that.config.data = undefined;
             $.extend(true, that.config, options);
             return that;
         },
@@ -186,19 +187,20 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                 $.ajax(options);
             }
             var tIndex = setInterval(function() {
-                if (_data.length > 0)
+                if (_data.length > 0) {
                     clearInterval(tIndex);
-                //渲染模板
-                laytpl(_tpl.join('')).render(_data, function(html) {
-                    _elem.html(html);
-                    element.init();
-                    //绑定a标签的点击事件
-                    that.bind(function(data) {
-                        typeof callback === 'function' && callback(data);
+                    //渲染模板
+                    laytpl(_tpl.join('')).render(_data, function(html) {
+                        _elem.html(html);
+                        element.init();
+                        //绑定a标签的点击事件
+                        that.bind(function(data) {
+                            typeof callback === 'function' && callback(data);
+                        });
+                        //关闭等待层
+                        navbarLoadIndex && layer.close(navbarLoadIndex);
                     });
-                    //关闭等待层
-                    navbarLoadIndex && layer.close(navbarLoadIndex);
-                });
+                }
             }, 50);
             return that;
         }
