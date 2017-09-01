@@ -1,7 +1,7 @@
 var ModuleTable = function() {
     this.config = {
         elem: '#demo',
-        height: 500, //容器高度
+        height: 'full-135', //容器高度
         url: 'table.json',
         page: true,
         id: 'demo',

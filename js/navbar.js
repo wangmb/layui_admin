@@ -15,7 +15,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
         element = layui.element;
 
     var navbar = {
-        v: '1.0.1',
+        v: '1.0.2',
         config: {
             data: undefined, //静态数据
             remote: {
@@ -117,7 +117,11 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                 _remote = _config.remote, //远程参数配置
                 _tpl = [
                     '{{# layui.each(d,function(index, item){ }}',
+                    '{{# if(item.spread){ }}',
+                    '<li class="layui-nav-item layui-nav-itemed">',
+                    '{{# }else{ }}',
                     '<li class="layui-nav-item">',
+                    '{{# } }}',
                     '{{# var hasChildren = item.children!==undefined && item.children.length>0; }}',
                     '{{# if(hasChildren){ }}',
                     '<a href="javascript:;">',

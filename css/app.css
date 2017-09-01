@@ -33,8 +33,13 @@
     background-color: rgba(0, 0, 0, .38);
 }
 
+.kit-layout-admin .kit-logo-mobile {
+    display: none;
+}
+
 .layui-layout-admin .layui-header .layui-layout-right {
-    right: 5px;
+    /* right: 5px; */
+    padding: 0;
 }
 
 .kit-nav .layui-nav-item {
@@ -42,11 +47,11 @@
 }
 
 .kit-nav .layui-nav-item .layui-nav-more {
-    top: 23px;
+    top: 22px;
 }
 
 .kit-nav .layui-nav-item .layui-nav-mored {
-    top: 18px;
+    top: 16px;
 }
 
 .kit-nav .layui-nav-item .layui-nav-child {
@@ -337,5 +342,18 @@
     .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item a span,
     .kit-layout-admin .kit-side .layui-side-scroll .layui-nav li.layui-nav-item dl dd a span {
         display: none;
+    }
+    .kit-side .layui-side-scroll .kit-side-fold {
+        display: none;
+    }
+    .kit-layout-admin .layui-logo {
+        display: none;
+    }
+    .kit-layout-admin .kit-logo-mobile {
+        display: block;
+        width: 50px;
+    }
+    .kit-layout-admin .layui-layout-left {
+        left: 50px;
     }
 }
