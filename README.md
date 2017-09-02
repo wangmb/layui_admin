@@ -46,7 +46,7 @@ $(selector).on('click',function(){<br />
     });<br />
 });<br />
 点击我测试message组件<br />
-tab组件添加两个属性：closeBefore[关闭选项卡之前发生]、onSwitch[选项卡切换时发生](具体请查看文档[好像文档还没加进去~~~])<br />
+tab组件添加两个属性：closeBefore[关闭选项卡之前发生]、onSwitch[选项卡切换时发生](具体请查看文档)<br />
 <br />
 8月24日<br />
 <br />
