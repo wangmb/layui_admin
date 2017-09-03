@@ -15,13 +15,13 @@ var task = {
     mincss: function() {
         return gulp.src(['./src/css/**/*.css'])
             .pipe(minify())
-            .pipe(header.apply(null, ['/** <%= pkg.name %>-v<%= pkg.version %> <%= pkg.license %> License By <%= pkg.homepage %> */\n <%= js %>', { pkg: pkg, js: ';' }]))
+            .pipe(header.apply(null, ['/** <%= pkg.name %>-v<%= pkg.version %> <%= pkg.license %> License By <%= pkg.homepage %> */\n', { pkg: pkg }]))
             .pipe(gulp.dest('./build/css'));
     },
     minjs: function() {
         return gulp.src('./src/js/*.js')
             .pipe(gulpif('!app.js', uglify()))
-            .pipe(header.apply(null, ['/** <%= pkg.name %>-v<%= pkg.version %> <%= pkg.license %> License By <%= pkg.homepage %> */\n', { pkg: pkg }]))
+            .pipe(header.apply(null, ['/** <%= pkg.name %>-v<%= pkg.version %> <%= pkg.license %> License By <%= pkg.homepage %> */\n <%= js %>', { pkg: pkg, js: ';' }]))
             .pipe(gulp.dest('./build/js'));
     },
     file: function() {

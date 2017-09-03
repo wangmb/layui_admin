@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.3 MIT License By http://kit/zhengjinfan.cn */
+/** kit_admin-v1.0.4 MIT License By http://kit/zhengjinfan.cn */
  ;/**
  * Name:app.js
  * Author:Van
