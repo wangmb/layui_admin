@@ -1,7 +1,7 @@
 {
     "name": "kit_admin",
-    "version": "1.0.3",
-    "description": "",
+    "version": "1.0.5",
+    "description": "基于layui2.*",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
     },
     "homepage": "http://kit/zhengjinfan.cn",
     "author": "Van",
+    "email": "zheng_jinfan@126.com",
     "license": "MIT",
     "dependencies": {},
     "devDependencies": {

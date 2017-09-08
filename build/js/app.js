@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.4 MIT License By http://kit/zhengjinfan.cn */
+/** kit_admin-v1.0.5 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
  ;/**
  * Name:app.js
  * Author:Van
@@ -185,6 +185,9 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                     });
                                     break;
                             }
+                        },
+                        renderAfter: function(elem) {
+                            elem.find('li').eq(0).click(); //模拟点击第一个
                         }
                     }).render();
                 }
