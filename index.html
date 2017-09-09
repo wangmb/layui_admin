@@ -34,7 +34,7 @@
                         <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> Van
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">基本资料</a></dd>
+                        <dd><a href="javascript:;" kit-target data-options="{url:'basic.html',icon:'&#xe658;',title:'基本资料',id:'966'}"><span>基本资料</span></a></dd>
                         <dd><a href="javascript:;">安全设置</a></dd>
                     </dl>
                 </li>
@@ -88,7 +88,7 @@
         </div>
         <div class="layui-body" id="container">
             <!-- 内容主体区域 -->
-            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+            <div style="padding: 15px;"><i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63e;</i> 请稍等...</div>
         </div>
 
         <div class="layui-footer">
@@ -106,7 +106,7 @@
     <script>
         var message;
         layui.config({
-            base: 'build/js/'
+            base: 'src/js/'
         }).use(['app', 'message'], function() {
             var app = layui.app,
                 $ = layui.jquery,
