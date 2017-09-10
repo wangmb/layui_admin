@@ -59,3 +59,16 @@
         </div>
     </div>
 </form>
+<script>
+    layui.form.render();
+
+    var form = layui.form;
+    form.render();
+
+    form.on('submit(formDemo)', function(data) {
+        console.log(data);
+        return false;
+    });
+
+    console.log(tab);
+</script>
