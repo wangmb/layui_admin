@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.6 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
+/** kit_admin-v1.0.7 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
  ;/**
  * Name:app.js
  * Author:Van
@@ -63,6 +63,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 tab.set({
                     //renderType: 'iframe',
                     //mainUrl: 'table.html',
+                    //openWait: false,
                     elem: '#container',
                     onSwitch: function(data) { //选项卡切换时触发
                         //console.log(data.layId); //lay-id值
@@ -79,17 +80,17 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     }
                 }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件                
-                navbar.bind(function(data) {
-                    tab.tabAdd(data);
-                });
-                //navbar加载方式二，设置远程地址加载
-                // navbar.set({
-                //     remote: {
-                //         url: '/datas/navbar1.json'
-                //     }
-                // }).render(function(data) {
+                // navbar.bind(function(data) {
                 //     tab.tabAdd(data);
                 // });
+                //navbar加载方式二，设置远程地址加载
+                navbar.set({
+                    remote: {
+                        url: '/datas/navbar1.json'
+                    }
+                }).render(function(data) {
+                    tab.tabAdd(data);
+                });
                 //navbar加载方式三，设置data本地数据
                 // navbar.set({
                 //     data: [{
