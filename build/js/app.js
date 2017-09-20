@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.7 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
+/** kit_admin-v1.0.8 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
  ;/**
  * Name:app.js
  * Author:Van
@@ -7,7 +7,7 @@
  * LICENSE:MIT
  */
 var tab;
-layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel', 'laytpl'], function(exports) {
+layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel', 'laytpl', 'spa'], function(exports) {
     var $ = layui.jquery,
         element = layui.element,
         layer = layui.layer,
@@ -18,7 +18,8 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
         table = layui.table,
         loader = layui.loader,
         navbar = layui.navbar,
-        _componentPath = 'components/';
+        _componentPath = 'components/',
+        spa = layui.spa;
     tab = layui.tab
     var app = {
         hello: function(str) {
@@ -35,6 +36,13 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
         init: function() {
             var that = this,
                 _config = that.config;
+            if (_config.type === 'spa') {
+                navbar.bind(function(data) {
+                    spa.render(data.url, function() {
+                        console.log('渲染完成..');
+                    });
+                });
+            }
             if (_config.type === 'page') {
                 tab.set({
                     renderType: 'page',
