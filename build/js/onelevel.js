@@ -1,2 +1,122 @@
-/** kit_admin-v1.0.9 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
- ;layui.define(["jquery","laytpl","element"],function(e){var i=layui.jquery,n=(i(window),i(document)),t=layui.laytpl;e("onelevel",{v:"1.0.1",config:{elem:void 0,data:void 0,remote:{url:void 0,type:"GET"},onClicked:void 0},set:function(e){var n=this;return i.extend(!0,n.config,e),n},hasElem:function(){var e=this.config;return void 0!==e.elem||0!==n.find("ul[kit-one-level]").length||!i(e.elem)},getElem:function(){var e=this.config;return void 0!==e.elem&&i(e.elem).length>0?i(e.elem):n.find("ul[kit-one-level]")},render:function(){var e=this,n=e.config,a=n.remote,l=["{{# layui.each(d,function(index, item){ }}",'<li class="layui-nav-item">','<a href="javascript:;" data-title="{{item.title}}" data-icon="{{item.icon}}" data-id="{{item.id}}" >','{{# if (item.icon.indexOf("fa-") !== -1) { }}','<i class="fa {{item.icon}}" aria-hidden="true"></i>',"{{# } else { }}",'<i class="layui-icon">{{item.icon}}</i>',"{{# } }}","<span> {{item.title}}</span>","</a>","</li>","{{# }); }}"],o=[],r=layer.load(2);if(!e.hasElem())return e;var c=e.getElem();if(void 0!==n.data&&n.data.length>0)o=n.data;else{a.jsonp;var d={url:a.url,type:a.type,error:function(e,i,n){layui.hint().error("One-Level error:AJAX请求出错."+n)},success:function(e){o=e}};i.extend(!0,d,a.jsonp?{dataType:"jsonp",jsonp:"callback",jsonpCallback:"jsonpCallback"}:{dataType:"json"}),i.support.cors=!0,i.ajax(d)}var u=setInterval(function(){o.length>0&&clearInterval(u),t(l.join("")).render(o,function(e){c.html(e),layui.element.init(),"function"==typeof n.onClicked&&c.children("li.layui-nav-item").off("click").on("click",function(){var e=i(this).children("a").data("id");n.onClicked(e)}),r&&layer.close(r),"function"==typeof n.renderAfter&&n.renderAfter(c)})},50);return e}})});
+/** kit_admin-v1.1.0 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
+ ;/**
+ * Name:onelevel.js
+ * Author:Van
+ * E-mail:zheng_jinfan@126.com
+ * Website:http://kit.zhengjinfan.cn/
+ * LICENSE:MIT
+ */
+layui.define(['jquery', 'laytpl', 'element'], function(exports) {
+    var $ = layui.jquery,
+        _modName = 'oneLevel',
+        _win = $(window),
+        _doc = $(document),
+        laytpl = layui.laytpl;
+
+    var oneLevel = {
+        v: '1.0.1',
+        config: {
+            elem: undefined,
+            data: undefined,
+            remote: {
+                url: undefined,
+                type: 'GET'
+            },
+            onClicked: undefined
+        },
+        set: function(options) {
+            var that = this;
+            $.extend(true, that.config, options);
+            return that;
+        },
+        /**
+         * 是否已设置了elem
+         */
+        hasElem: function() {
+            var that = this,
+                _config = that.config;
+            if (_config.elem === undefined && _doc.find('ul[kit-one-level]').length === 0 && $(_config.elem)) {
+                //console.log('One-Level error:请配置One-Level容器.');
+                //do something..
+                return false;
+            }
+            return true;
+        },
+        /**
+         * 获取容器的jq对象
+         */
+        getElem: function() {
+            var _config = this.config;
+            return (_config.elem !== undefined && $(_config.elem).length > 0) ? $(_config.elem) : _doc.find('ul[kit-one-level]');
+        },
+        render: function() {
+            var that = this,
+                _config = that.config, //配置
+                _remote = _config.remote, //远程参数配置
+                _tpl = [
+                    '{{# layui.each(d,function(index, item){ }}',
+                    '<li class="layui-nav-item">',
+                    '<a href="javascript:;" data-title="{{item.title}}" data-icon="{{item.icon}}" data-id="{{item.id}}" >',
+                    '{{# if (item.icon.indexOf("fa-") !== -1) { }}',
+                    '<i class="fa {{item.icon}}" aria-hidden="true"></i>',
+                    '{{# } else { }}',
+                    '<i class="layui-icon">{{item.icon}}</i>',
+                    '{{# } }}',
+                    '<span> {{item.title}}</span>',
+                    '</a>',
+                    '</li>',
+                    '{{# }); }}',
+                ], //模板
+                _data = [];
+            var navbarLoadIndex = layer.load(2);
+            if (!that.hasElem())
+                return that;
+            var _elem = that.getElem();
+            //本地数据优先
+            if (_config.data !== undefined && _config.data.length > 0) {
+                _data = _config.data;
+            } else {
+                var dataType = _remote.jsonp ? 'jsonp' : 'json';
+                var options = {
+                    url: _remote.url,
+                    type: _remote.type,
+                    error: function(xhr, status, thrown) {
+                        layui.hint().error('One-Level error:AJAX请求出错.' + thrown);
+                    },
+                    success: function(res) {
+                        _data = res;
+                    }
+                };
+                $.extend(true, options, _remote.jsonp ? {
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    jsonpCallback: 'jsonpCallback'
+                } : {
+                    dataType: 'json'
+                });
+                $.support.cors = true;
+                $.ajax(options);
+            }
+            var tIndex = setInterval(function() {
+                if (_data.length > 0)
+                    clearInterval(tIndex);
+                //渲染模板
+                laytpl(_tpl.join('')).render(_data, function(html) {
+                    _elem.html(html);
+                    layui.element.init();
+                    typeof _config.onClicked === 'function' && _elem.children('li.layui-nav-item').off('click').on('click', function() {
+                        var _a = $(this).children('a'),
+                            id = _a.data('id');
+                        _config.onClicked(id);
+                    });
+                    //关闭等待层
+                    navbarLoadIndex && layer.close(navbarLoadIndex);
+                    typeof _config.renderAfter === 'function' && _config.renderAfter(_elem);
+                });
+            }, 50);
+            return that;
+        }
+    };
+
+    exports('onelevel', oneLevel);
+});

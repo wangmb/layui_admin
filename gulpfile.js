@@ -20,7 +20,7 @@ var task = {
     },
     minjs: function() {
         return gulp.src('./src/js/*.js')
-            .pipe(gulpif('!app.js', uglify()))
+            .pipe(gulpif(['!app.js', '!config.js'], uglify()))
             .pipe(header.apply(null, ['/** <%= pkg.name %>-v<%= pkg.version %> <%= pkg.license %> License By <%= pkg.homepage %> e-mail:<%= pkg.email %> */\n <%= js %>', { pkg: pkg, js: ';' }]))
             .pipe(gulp.dest('./build/js'));
     },

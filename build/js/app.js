@@ -1,4 +1,4 @@
-/** kit_admin-v1.0.9 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
+/** kit_admin-v1.1.0 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
  ;/**
  * Name:app.js
  * Author:Van
@@ -192,6 +192,32 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     }).render();
                 }
             }
+
+            // ripple start
+            var addRippleEffect = function(e) {
+                // console.log(e);
+                layui.stope(e)
+                var target = e.target;
+                if (target.localName !== 'button' && target.localName !== 'a') return false;
+                var rect = target.getBoundingClientRect();
+                var ripple = target.querySelector('.ripple');
+                if (!ripple) {
+                    ripple = document.createElement('span');
+                    ripple.className = 'ripple'
+                    ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px'
+                    target.appendChild(ripple);
+                }
+                ripple.classList.remove('show');
+                var top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
+                var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
+                ripple.style.top = top + 'px'
+                ripple.style.left = left + 'px'
+                ripple.classList.add('show');
+                return false;
+            }
+            document.addEventListener('click', addRippleEffect, false);
+            // ripple end
+
             return that;
         }
     };
