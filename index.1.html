@@ -7,7 +7,7 @@
     <title>KIT ADMIN</title>
     <link rel="stylesheet" href="./plugins/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css" media="all">
-    <link rel="stylesheet" href="./build/css/app.css" media="all">
+    <link rel="stylesheet" href="./src/css/app.css" media="all">
 </head>
 
 <body>
@@ -98,7 +98,7 @@
     <script>
         var message;
         layui.config({
-            base: 'build/js/'
+            base: 'src/js/'
         }).use(['app', 'message'], function() {
             var app = layui.app,
                 $ = layui.jquery,
