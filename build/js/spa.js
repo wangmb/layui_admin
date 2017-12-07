@@ -15,7 +15,7 @@ layui.define(['layer', 'nprogress', 'utils'], function(exports) {
     var Spa = function() {
         this.config = {
             elem: '#container',
-            openWait: true
+            openWait: false
         };
         this.v = '1.0.0';
     };

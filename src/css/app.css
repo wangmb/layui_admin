@@ -81,13 +81,13 @@ button {
     line-height: 50px;
 }
 
-.kit-nav .layui-nav-item .layui-nav-more {
+/* .kit-nav .layui-nav-item .layui-nav-more {
     top: 22px;
-}
+} */
 
-.kit-nav .layui-nav-item .layui-nav-mored {
+/* .kit-nav .layui-nav-item .layui-nav-mored {
     top: 16px;
-}
+} */
 
 .kit-nav .layui-nav-item .layui-nav-child {
     top: 55px;

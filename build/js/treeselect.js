@@ -36,35 +36,8 @@ layui.define(['layer', 'ztree'], function(exports) {
           zTree.checkNode(treeNode, !treeNode.checked, null, true);
         },
         // ztree 点击时发生
-        onClick: function(e, treeId, treeNode) {
-          var zTree = $.fn.zTree.getZTreeObj(treeId),
-            nodes = zTree.getCheckedNodes(true), //获取选中的节点
-            valIds = [],
-            arr = [];
-          for (var i = 0, l = nodes.length; i < l; i++) {
-            valIds.push(nodes[i].id);
-            arr.push({
-              name: nodes[i].name,
-              id: nodes[i].id,
-              tid: nodes[i].tId
-            });
-          }
-          _div = $(options.elem);
-          var _htm = [];
-          layui.each(arr, function(index, item) {
-            _htm.push([
-              '<a href="javascript:;">',
-              item.name,
-              ' <i class="layui-icon" data-action="close" data-tid="' + item.tid + '" data-id="' + item.id + '">&#x1006;</i>',
-              '</a>'
-            ].join(''));
-          });
-          _div.html(_htm.join(''));
-          //给input 赋值
-          var _input = _div.siblings('input.layui-input');
-          _input.attr("value", valIds.join(','));
-          _bindCloseEvent();
-        }
+        onClick: onClick,
+        onCheck: onClick
       }
     };
     // 获取当前时间戳
@@ -109,6 +82,36 @@ layui.define(['layer', 'ztree'], function(exports) {
         }
       }
     };
+    //点击事件的处理
+    function onClick(e, treeId, treeNode) {
+      var zTree = $.fn.zTree.getZTreeObj(treeId),
+        nodes = zTree.getCheckedNodes(true), //获取选中的节点
+        valIds = [],
+        arr = [];
+      for (var i = 0, l = nodes.length; i < l; i++) {
+        valIds.push(nodes[i].id);
+        arr.push({
+          name: nodes[i].name,
+          id: nodes[i].id,
+          tid: nodes[i].tId
+        });
+      }
+      _div = $(options.elem);
+      var _htm = [];
+      layui.each(arr, function(index, item) {
+        _htm.push([
+          '<a href="javascript:;">',
+          item.name,
+          ' <i class="layui-icon" data-action="close" data-tid="' + item.tid + '" data-id="' + item.id + '">&#x1006;</i>',
+          '</a>'
+        ].join(''));
+      });
+      _div.html(_htm.join(''));
+      //给input 赋值
+      var _input = _div.siblings('input.layui-input');
+      _input.attr("value", valIds.join(','));
+      _bindCloseEvent();
+    }
     // input 框点击事件
     $(options.elem).off('click').on('click', function() {
       $("#" + eId).show();
@@ -145,55 +148,56 @@ layui.define(['layer', 'ztree'], function(exports) {
         $(this).parent().remove();
       });
     }
+    return that;
+  };
 
-    // Array 扩展
-    Array.prototype.indexOf = function(val) {
-      for (var i = 0; i < this.length; i++) {
-        if (this[i] == val) return i;
-      }
-      return -1;
-    };
-    // 移除指定值
-    Array.prototype.remove = function(val) {
-      var index = this.indexOf(val);
-      if (index > -1) {
-        this.splice(index, 1);
-      }
-    };
-    /**
-     * 
-     * 查找数组，返回匹配到的第一个index
-     * 
-     * @param array 被查找的数组
-     * @param feature 查找特征 或者为一个具体值，用于匹配数组遍历的值，或者为一个对象，表明所有希望被匹配的key-value
-     * @param or boolean 希望命中feature全部特征或者只需命中一个特征，默认true
-     * 
-     * @return 数组下标  查找不到返回-1
-     */
-    function findArray(array, feature, all = true) {
-      for (let index in array) {
-        let cur = array[index];
-        if (feature instanceof Object) {
-          let allRight = true;
-          for (let key in feature) {
-            let value = feature[key];
-            if (cur[key] == value && !all) return index;
-            if (all && cur[key] != value) {
-              allRight = false;
-              break;
-            }
-          }
-          if (allRight) return index;
-        } else {
-          if (cur == feature) {
-            return index;
+
+  // Array 扩展
+  Array.prototype.indexOf = function(val) {
+    for (var i = 0; i < this.length; i++) {
+      if (this[i] == val) return i;
+    }
+    return -1;
+  };
+  // 移除指定值
+  Array.prototype.remove = function(val) {
+    var index = this.indexOf(val);
+    if (index > -1) {
+      this.splice(index, 1);
+    }
+  };
+  /**
+   * 
+   * 查找数组，返回匹配到的第一个index
+   * 
+   * @param array 被查找的数组
+   * @param feature 查找特征 或者为一个具体值，用于匹配数组遍历的值，或者为一个对象，表明所有希望被匹配的key-value
+   * @param or boolean 希望命中feature全部特征或者只需命中一个特征，默认true
+   * 
+   * @return 数组下标  查找不到返回-1
+   */
+  function findArray(array, feature, all) {
+    all = all || true;
+    for (var index in array) {
+      var cur = array[index];
+      if (feature instanceof Object) {
+        var allRight = true;
+        for (var key in feature) {
+          var value = feature[key];
+          if (cur[key] == value && !all) return index;
+          if (all && cur[key] != value) {
+            allRight = false;
+            break;
           }
         }
+        if (allRight) return index;
+      } else {
+        if (cur == feature) {
+          return index;
+        }
       }
-      return -1;
     }
-
-    return that;
+    return -1;
   };
   // 导出组件
   exports(_MOD, new TreeSelect());

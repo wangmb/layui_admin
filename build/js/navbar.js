@@ -215,5 +215,5 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             return that;
         }
     };
-    exports('navbar', navbar);
+    exports(_modName, navbar);
 });

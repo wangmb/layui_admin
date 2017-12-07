@@ -38,7 +38,9 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                 _config = that.config;
             if (_config.type === 'spa') {
                 navbar.bind(function(data) {
-                    spa.render(data.url, function() {
+                    spa.set({
+                        // openWait: true
+                    }).render(data.url, function() {
                         console.log('渲染完成..');
                     });
                 });

@@ -22,7 +22,7 @@ layui.define(['jquery', 'element', 'nprogress', 'utils'], function(exports) {
             elem: undefined,
             mainUrl: 'main.html',
             renderType: 'iframe',
-            openWait: true
+            openWait: false
         };
         this.v = '1.0.5';
     };
