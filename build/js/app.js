@@ -1,5 +1,5 @@
 /** kit_admin-v1.1.0 MIT License By http://kit/zhengjinfan.cn e-mail:zheng_jinfan@126.com */
- ;/**
+;/**
  * Name:app.js
  * Author:Van
  * E-mail:zheng_jinfan@126.com
@@ -7,7 +7,7 @@
  * LICENSE:MIT
  */
 var tab;
-layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel', 'laytpl', 'spa'], function(exports) {
+layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar', 'onelevel', 'laytpl', 'spa'], function (exports) {
     var $ = layui.jquery,
         element = layui.element,
         layer = layui.layer,
@@ -19,28 +19,29 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
         loader = layui.loader,
         navbar = layui.navbar,
         _componentPath = 'components/',
-        spa = layui.spa;
-    tab = layui.tab
+        spa = layui.spa,
+        tab = layui.tab;
     var app = {
-        hello: function(str) {
+        hello: function (str) {
             layer.alert('Hello ' + (str || 'test'));
         },
         config: {
             type: 'iframe'
         },
-        set: function(options) {
+        set: function (options) {
             var that = this;
             $.extend(true, that.config, options);
             return that;
         },
-        init: function() {
+        init: function () {
+            console.log(111);
             var that = this,
                 _config = that.config;
             if (_config.type === 'spa') {
-                navbar.bind(function(data) {
+                navbar.bind(function (data) {
                     spa.set({
                         // openWait: true
-                    }).render(data.url, function() {
+                    }).render(data.url, function () {
                         console.log('渲染完成..');
                     });
                 });
@@ -50,12 +51,12 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     renderType: 'page',
                     mainUrl: 'table.html',
                     elem: '#container',
-                    onSwitch: function(data) { //选项卡切换时触发
+                    onSwitch: function (data) { //选项卡切换时触发
                         //console.log(data.layId); //lay-id值
                         //console.log(data.index); //得到当前Tab的所在下标
                         //console.log(data.elem); //得到当前的Tab大容器
                     },
-                    closeBefore: function(data) { //关闭选项卡之前触发
+                    closeBefore: function (data) { //关闭选项卡之前触发
                         // console.log(data);
                         // console.log(data.icon); //显示的图标
                         // console.log(data.id); //lay-id
@@ -65,7 +66,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     }
                 }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件                
-                navbar.bind(function(data) {
+                navbar.bind(function (data) {
                     tab.tabAdd(data);
                 });
             }
@@ -75,12 +76,12 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     //mainUrl: 'table.html',
                     //openWait: false,
                     elem: '#container',
-                    onSwitch: function(data) { //选项卡切换时触发
+                    onSwitch: function (data) { //选项卡切换时触发
                         //console.log(data.layId); //lay-id值
                         //console.log(data.index); //得到当前Tab的所在下标
                         //console.log(data.elem); //得到当前的Tab大容器
                     },
-                    closeBefore: function(data) { //关闭选项卡之前触发
+                    closeBefore: function (data) { //关闭选项卡之前触发
                         // console.log(data);
                         // console.log(data.icon); //显示的图标
                         // console.log(data.id); //lay-id
@@ -90,7 +91,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                     }
                 }).render();
                 //navbar加载方式一，直接绑定已有的dom元素事件                
-                navbar.bind(function(data) {
+                navbar.bind(function (data) {
                     tab.tabAdd(data);
                 });
                 //navbar加载方式二，设置远程地址加载
@@ -132,19 +133,20 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
 
                 //处理顶部一级菜单
                 var onelevel = layui.onelevel;
+                console.log(onelevel);
                 if (onelevel.hasElem()) {
                     onelevel.set({
                         remote: {
                             url: '/datas/onelevel1.json' //远程地址
                         },
-                        onClicked: function(id) {
+                        onClicked: function (id) {
                             switch (id) {
                                 case 1:
                                     navbar.set({
                                         remote: {
                                             url: '/datas/navbar1.json'
                                         }
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;
@@ -153,7 +155,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                         remote: {
                                             url: '/datas/navbar2.json'
                                         }
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;
@@ -182,13 +184,13 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
                                             url: "https://www.baidu.com",
                                             spread: false
                                         }]
-                                    }).render(function(data) {
+                                    }).render(function (data) {
                                         tab.tabAdd(data);
                                     });
                                     break;
                             }
                         },
-                        renderAfter: function(elem) {
+                        renderAfter: function (elem) {
                             elem.find('li').eq(0).click(); //模拟点击第一个
                         }
                     }).render();
@@ -196,7 +198,7 @@ layui.define(['element', 'nprogress', 'form', 'table', 'loader', 'tab', 'navbar'
             }
 
             // ripple start
-            var addRippleEffect = function(e) {
+            var addRippleEffect = function (e) {
                 // console.log(e);
                 layui.stope(e)
                 var target = e.target;
