@@ -9,17 +9,75 @@
     <link rel="stylesheet" href="../plugins/layui/css/layui.css"  media="all">
 </head>
 <body style="overflow-y: scroll;">
+<div class="layui-input-block" style="width:100px">
+    <input id="zoomText" style="display: flex" type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+</div>
+
+<div class="layui-col-xs12 layui-col-sm12layui-col-md12 layui-btn-group">
+    <button class="layui-btn layui-btn-sm" onclick="layui.map.showMarkers()">显示图标</button>
+    <button class="layui-btn layui-btn-sm" onclick="layui.map.removeMarkers()">隐藏图标</button>
+</div>
+
+
+<div id="map" style="height:500px;width:100%"></div>
 
 
 
 
 <script src="../plugins/layui/layui.js" charset="utf-8"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4ozDY6KfssTHMTaU6PWEnFXl3aGFzkTt"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=4ozDY6KfssTHMTaU6PWEnFXl3aGFzkTt"></script>
+<script type="text/javascript" src="../src/js/map.js"></script>
+<script type="text/javascript">
+
+    // layui.use(['jquery'],function () {
+    //     var $ = layui.jquery;
+    //
+    //     // 百度地图API功能
+    //
+    //
+    //     var data =[
+    //         {lon:116.404,lat:39.915},
+    //         {lon:116.404,lat:39.925},
+    //         {lon:116.404,lat:39.905},
+    //         {lon:116,lat:39.905},
+    //         {lon:117,lat:39.905},
+    //         {lon:118.790611,lat:32.148034},
+    //         {lon:118.690611,lat:32.248034},
+    //         {lon:118.590611,lat:32.348034},
+    //         {lon:118.490611,lat:32.448034}
+    //     ];
+    //
+    //     /**
+    //      * 监听地图缩放事件
+    //      * @type {Array}
+    //      */
+    //     map.addEventListener('zoomend',function () {
+    //         $('#zoomText').val(map.getZoom());
+    //     });
+    //
+    //     let markers = [];
+    //
+    //     for(let item in data){
+    //         markers.push( new BMap.Marker(new BMap.Point(data[item].lon,data[item].lat)));
+    //     }
+    //
+    //     function addPoint() {
+    //         for(let item in markers){
+    //             map.addOverlay(markers[item]);
+    //         }
+    //     }
+    //
+    //     function removePoint() {
+    //         map.clearOverlays();
+    //     }
+    // })
 
 
-
+</script>
 </body>
 </html>
+
+
 
 
 
